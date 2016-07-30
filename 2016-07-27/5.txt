@@ -1,0 +1,10 @@
+A DNS or Domain Name Server (such as BIND or TinyDNS) resolves a hostname into a corresponding ip address. In general they work by checking local records and then recursively checking upstream as follows:
+  * When a request is made they check local records to see if there is a corresponding address for the requested host. If so they return it.
+  * If they cannot find a corresponding address, they check a cache of previously queried addresses for the requested host. If they have a valid cache entry, they return it.
+  * If there is no cache entry, depending on the configuration of the DNS server they might:
+    * pass the request to upstream DNS server which handles the request as above.
+    * or pass the request to a TLD (top level domain) an authoritative DNS server, which knows and can resolve all non-local addresses.
+    * or return indicating there is no such domain.
+  * If there is a valid entry in an upstream server or from a TLD server they [generally] cache and then return it.
+
+Records have an associated shelf life or expiry time, so rotate out of the cache once they reach a TTL (time to live) age. There are several different record types so for example a domain might have C records, MX records, Alias records, etc.
