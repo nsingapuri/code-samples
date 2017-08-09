@@ -17,27 +17,14 @@
  * @todo implement -h / --help
  */
 
-$file = $argv[1];
-$handle = fopen($file, 'r');
+$s = file_get_contents($argv[1]);
 
-$s = fread($handle, filesize($file));
-$s = trim(preg_replace('/[^A-z]+/', ' ', $s));
-
-$tokens = explode(' ', $s);
-$tokenCounts = [];
-
-foreach ($tokens as $token) {
-    if (isset($tokenCounts[$token])) {
-        $tokenCounts[$token]++;
-    } else {
-        $tokenCounts[$token]=1;
-    }
-}
-
+preg_match_all('/\w+/', $s, $tokens);
+$tokenCounts = array_count_values($tokens[0]);
 arsort($tokenCounts);
 
 foreach ($tokenCounts as $token => $count) {
-    echo "$count $token" . PHP_EOL;
+    echo "{$count} {$token}" . PHP_EOL;
 }
 
 ?>

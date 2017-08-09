@@ -19,13 +19,7 @@
  * @return mixed[]
  */
 function arrayReverse($a) {
-    $reversed = [];
-
-    for ($i=count($a)-1; $i >= 0; $i--) {
-        $reversed[] = $a[$i];
-    }
-
-    return $reversed;
+    return array_reverse($a);
 }
 
 
