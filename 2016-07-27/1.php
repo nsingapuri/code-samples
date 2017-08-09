@@ -1,6 +1,7 @@
 <?php
 /**
  * An method to reverse an [indexed] array.
+ * Cannot use any builtin methods
  *
  * PHP version >= 5.5
  *
@@ -20,8 +21,13 @@
  */
 function arrayReverse($a) {
     $reversed = [];
+    $arrayCount = 0;
 
-    for ($i=count($a)-1; $i >= 0; $i--) {
+    foreach ($a as $element) {
+        $arrayCount++;
+    }
+
+    for ($i=$arrayCount - 1; $i >= 0; $i--) {
         $reversed[] = $a[$i];
     }
 
